@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-//Threshold contains the threshold logic: https://www.monitoring-plugins.org/doc/guidelines.html#THRESHOLDFORMAT
+// Threshold contains the threshold logic: https://www.monitoring-plugins.org/doc/guidelines.html#THRESHOLDFORMAT
 type Threshold struct {
 	input   string
 	lower   float64
@@ -24,11 +24,12 @@ var (
 	regexOutsideMinusInfToX = regexp.MustCompile(fmt.Sprintf(`^~:%s$`, regexDigit))
 	regexInsideOutsideXToY  = regexp.MustCompile(fmt.Sprintf(`^(@?)%s:%s$`, regexDigit, regexDigit))
 	minFloat64              = float64(math.MinInt64)
-	//ErrFirstBiggerThenSecond this error is thrown when the first number is bigger then the second
+
+	// ErrFirstBiggerThenSecond this error is thrown when the first number is bigger then the second
 	ErrFirstBiggerThenSecond = errors.New("First argument is bigger then second")
 )
 
-//String prints the Threshold
+// String prints the Threshold
 func (t Threshold) String() string {
 	return fmt.Sprintf("%s : %s , outside: %t",
 		strconv.FormatFloat(t.lower, 'f', -1, 64),
@@ -37,7 +38,7 @@ func (t Threshold) String() string {
 	)
 }
 
-//NewThreshold constructs a new Threshold from string, returns an Threshold if possible else nil and an error
+// NewThreshold constructs a new Threshold from string, returns an Threshold if possible else nil and an error
 func NewThreshold(def string) (*Threshold, error) {
 	def = strings.TrimSpace(def)
 	if def == "" {
@@ -74,9 +75,9 @@ func NewThreshold(def string) (*Threshold, error) {
 	return nil, fmt.Errorf("This threshold syntax is not supported: %s", def)
 }
 
-//IsValueOK tests if the given value fulfills the the Thresholds
-//false: value is critical/warning
-//true: value is ok
+// IsValueOK tests if the given value fulfills the the Thresholds
+// false: value is critical/warning
+// true: value is ok
 func (t Threshold) IsValueOK(value float64) bool {
 	if t.outside {
 		if value < t.lower || value > t.upper {

@@ -2,7 +2,6 @@ package Units
 
 import (
 	"fmt"
-	"strconv"
 )
 
 //ByteSize based on: https://golang.org/doc/effective_go.html#constants
@@ -21,7 +20,7 @@ const (
 )
 
 func castTString(b ByteSize) string {
-	return strconv.FormatFloat(float64(b), 'f', -1, 64)
+	return fmt.Sprintf("%0.3f", b)
 }
 
 func (b ByteSize) String() string {

@@ -7,57 +7,59 @@ import (
 	"sync"
 )
 
-type performanceData map[string]interface{}
+type PerformanceData map[string]interface{}
 
-var p = []performanceData{}
-var pMutex = &sync.Mutex{}
+var (
+	p      []PerformanceData = []PerformanceData{}
+	pMutex                   = &sync.Mutex{}
+)
 
-//NewPerformanceData adds a Performancedata object which can be expanded with further information
-func NewPerformanceData(label string, value float64) *performanceData {
+// NewPerformanceData adds a PerformanceData object which can be expanded with further information
+func NewPerformanceData(label string, value float64) *PerformanceData {
 	return NewPerformanceDataString(label, strconv.FormatFloat(value, 'f', -1, 64))
 }
 
-//NewPerformanceDataString adds a Performancedata object which can be expanded with further information
-func NewPerformanceDataString(label, value string) *performanceData {
+// NewPerformanceDataString adds a PerformanceData object which can be expanded with further information
+func NewPerformanceDataString(label, value string) *PerformanceData {
 	pMutex.Lock()
-	p = append(p, performanceData{"label": label, "value": value})
+	p = append(p, PerformanceData{"label": label, "value": value})
 	newOne := &(p[len(p)-1])
 	pMutex.Unlock()
 	return newOne
 }
 
-//Unit adds an unit string to the performancedata
-func (p performanceData) Unit(unit string) performanceData {
+// Unit adds an unit string to the PerformanceData
+func (p PerformanceData) Unit(unit string) PerformanceData {
 	p["unit"] = unit
 	return p
 }
 
-//Warn adds the threshold to the performancedata
-func (p performanceData) Warn(warn *Threshold) performanceData {
+// Warn adds the threshold to the PerformanceData
+func (p PerformanceData) Warn(warn *Threshold) PerformanceData {
 	p["warn"] = warn
 	return p
 }
 
-//Crit adds the threshold to the performancedata
-func (p performanceData) Crit(crit *Threshold) performanceData {
+// Crit adds the threshold to the PerformanceData
+func (p PerformanceData) Crit(crit *Threshold) PerformanceData {
 	p["crit"] = crit
 	return p
 }
 
-//Min adds the float64 to the performancedata
-func (p performanceData) Min(min float64) performanceData {
+// Min adds the float64 to the PerformanceData
+func (p PerformanceData) Min(min float64) PerformanceData {
 	p["min"] = min
 	return p
 }
 
-//Min adds the float64 to the performancedata
-func (p performanceData) Max(max float64) performanceData {
+// Min adds the float64 to the PerformanceData
+func (p PerformanceData) Max(max float64) PerformanceData {
 	p["max"] = max
 	return p
 }
 
-//toString prints this performancedata
-func (p performanceData) toString() string {
+// toString prints this PerformanceData
+func (p PerformanceData) toString() string {
 	var toPrint bytes.Buffer
 
 	toPrint.WriteString(fmt.Sprintf("'%s'=%s", p["label"], p["value"]))
@@ -88,7 +90,7 @@ func (p performanceData) toString() string {
 	return toPrint.String()
 }
 
-//PrintPerformanceData prints all performancedata
+// PrintPerformanceData prints all PerformanceData
 func PrintPerformanceData() string {
 	var toPrint bytes.Buffer
 	pMutex.Lock()

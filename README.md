@@ -30,7 +30,7 @@ func main() {
 	worstState, err := check_x.States{status1, status2}.GetWorst()
 	check_x.ExitOnError(err)
 
-	//set some performancedata
+	//set some PerformanceData
 	check_x.NewPerformanceData("foo", measuredValue1).Unit("B").Warn(warn).Crit(crit).Min(0).Max(100)
 	check_x.NewPerformanceData("bar", measuredValue2).Unit("s").Min(0)
 

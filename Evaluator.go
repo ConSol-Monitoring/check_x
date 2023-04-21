@@ -1,12 +1,12 @@
 package check_x
 
-//Evaluator stores the warning and critical thresholds
+// Evaluator stores the warning and critical thresholds
 type Evaluator struct {
 	Warning  *Threshold
 	Critical *Threshold
 }
 
-//Evaluate returns the stored values
+// Evaluate returns the stored values
 func (t Evaluator) Evaluate(value float64) (result State) {
 	if t.Critical != nil && !t.Critical.IsValueOK(value) {
 		result = Critical
