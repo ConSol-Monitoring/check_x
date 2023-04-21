@@ -1,5 +1,4 @@
-[![Circle CI](https://circleci.com/gh/Griesbacher/check_x/tree/master.svg?style=svg)](https://circleci.com/gh/Griesbacher/check_x/tree/master)
-[![Go Report Card](https://goreportcard.com/badge/github.com/Griesbacher/check_x)](https://goreportcard.com/report/github.com/Griesbacher/check_x)
+[![Go Report Card](https://goreportcard.com/badge/github.com/Consol-Monitoring/check_x)](https://goreportcard.com/report/github.com/Consol-Monitoring/check_x)
 
 # check_x
 Go Library to write Monitoring checks for Nagios/Icinga like checks
@@ -14,7 +13,7 @@ func main() {
 	warn, err := check_x.NewThreshold("10:")
 	//If you don't want to handle the error, you could just pass it to the user
 	check_x.ExitOnError(err)
-	
+
 	//Create a critical threshold
 	crit, err := check_x.NewThreshold("@20:30")
 	check_x.ExitOnError(err)
