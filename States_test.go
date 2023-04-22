@@ -10,9 +10,9 @@ var stateToString = []struct {
 	result string
 }{
 	{OK, "OK"},
-	{Warning, "Warning"},
-	{Critical, "Critical"},
-	{Unknown, "Unknown"},
+	{Warning, "WARNING"},
+	{Critical, "CRITICAL"},
+	{Unknown, "UNKNOWN"},
 }
 
 func TestState_String(t *testing.T) {
@@ -37,7 +37,7 @@ var intToState = []struct {
 func TestStateFromInt(t *testing.T) {
 	for i, data := range intToState {
 		if StateFromInt(data.input) != data.result {
-			t.Errorf("%d - Got: %s - expected: %s", i, data.input, data.result)
+			t.Errorf("%d - Got: %d - expected: %s", i, data.input, data.result)
 		}
 	}
 }
