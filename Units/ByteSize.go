@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-//ByteSize based on: https://golang.org/doc/effective_go.html#constants
+// ByteSize based on: https://golang.org/doc/effective_go.html#constants
 type ByteSize float64
 
 const (

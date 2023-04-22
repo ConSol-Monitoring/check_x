@@ -18,12 +18,12 @@ vendor:
 	go mod vendor
 
 test: fmt vendor
-	go test -v -timeout=1m ./
-	if grep -rn TODO: *.go ; then exit 1; fi
+	go test -v -timeout=1m ./ ./Units
+	if grep -rn TODO: *.go ./Units; then exit 1; fi
 
 clean:
 
 fmt:
-	go vet -all -assign -atomic -bool -composites -copylocks -nilfunc -rangeloops -unsafeptr -unreachable .
-	gofmt -w -s *.go
+	go vet -all -assign -atomic -bool -composites -copylocks -nilfunc -rangeloops -unsafeptr -unreachable . ./Units
+	gofmt -w -s *.go ./Units/*.go
 
