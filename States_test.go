@@ -31,7 +31,7 @@ var intToState = []struct {
 	{1, Warning},
 	{2, Critical},
 	{3, Unknown},
-	{4, State{code: 4}},
+	{4, State{Code: 4}},
 }
 
 func TestStateFromInt(t *testing.T) {
@@ -50,7 +50,7 @@ var stringToState = []struct {
 	{"Warning", Warning},
 	{"Critical", Critical},
 	{"Unknown", Unknown},
-	{"FOO", State{name: "FOO"}},
+	{"FOO", State{Name: "FOO"}},
 }
 
 func TestStateFromString(t *testing.T) {
