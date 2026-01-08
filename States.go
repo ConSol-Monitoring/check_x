@@ -8,8 +8,8 @@ import (
 
 // State represents an Nagioskind returncode
 type State struct {
-	name string
-	code int
+	Name string
+	Code int
 }
 
 // StateFromInt creates an known state if code is 0-3, else a new State will be returned
@@ -24,7 +24,7 @@ func StateFromInt(code int) State {
 	case 3:
 		return Unknown
 	default:
-		return State{code: code}
+		return State{Code: code}
 	}
 }
 
@@ -41,24 +41,24 @@ func StateFromString(name string) State {
 	case "unknown":
 		return Unknown
 	default:
-		return State{name: name}
+		return State{Name: name}
 	}
 }
 
 // String prints the name of the state
 func (s State) String() string {
-	return s.name
+	return s.Name
 }
 
 var (
 	// OK - returncode: 0
-	OK = State{name: "OK", code: 0}
+	OK = State{Name: "OK", Code: 0}
 	// Warning - returncode: 1
-	Warning = State{name: "WARNING", code: 1}
+	Warning = State{Name: "WARNING", Code: 1}
 	// Critical - returncode: 2
-	Critical = State{name: "CRITICAL", code: 2}
+	Critical = State{Name: "CRITICAL", Code: 2}
 	// Unknown - returncode: 3
-	Unknown = State{name: "UNKNOWN", code: 3}
+	Unknown = State{Name: "UNKNOWN", Code: 3}
 )
 
 // States is a list of state
@@ -74,7 +74,7 @@ func (s States) Len() int {
 
 // Less for Sort interface
 func (s States) Less(i, j int) bool {
-	return s[i].code < s[j].code
+	return s[i].Code < s[j].Code
 }
 
 // Swap for Sort interface

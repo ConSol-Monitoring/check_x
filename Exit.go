@@ -19,15 +19,20 @@ func ErrorExit(err error) {
 
 // Exit returns with the given returncode and message and optional PerformanceData
 func Exit(state State, msg string) {
-	LongExit(state, msg, "")
+	LongExit(state, msg, "", nil)
 }
 
 // LongExit returns with the given returncode and message and optional PerformanceData and long message
-func LongExit(state State, msg, longMsg string) {
-	if perf := PrintPerformanceData(); perf == "" {
-		fmt.Printf("%s - %s\n%s", state.name, msg, longMsg)
-	} else {
-		fmt.Printf("%s - %s|%s\n%s", state.name, msg, perf, longMsg)
+func LongExit(state State, msg, longMsg string, collection *PerformanceDataCollection) {
+	perfString := ""
+	if collection != nil {
+		perfString = collection.PrintAllPerformanceData()
 	}
-	os.Exit(state.code)
+
+	if perfString == "" {
+		fmt.Printf("%s - %s\n%s", state.Name, msg, longMsg)
+	} else {
+		fmt.Printf("%s - %s|%s\n%s", state.Name, msg, perfString, longMsg)
+	}
+	os.Exit(state.Code)
 }
