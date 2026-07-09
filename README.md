@@ -1,5 +1,3 @@
-[![Go Report Card](https://goreportcard.com/badge/github.com/Consol-Monitoring/check_x)](https://goreportcard.com/report/github.com/Consol-Monitoring/check_x)
-
 # check_x
 Go Library to write Monitoring checks for Nagios/Icinga like checks
 
